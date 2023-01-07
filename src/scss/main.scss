@@ -1,0 +1,15 @@
+@import './libs/_functions';
+@import './config/variables';
+@import './config/bootstrap-variables';
+@import './libs/_mixins';
+@import './config/global';
+@import "~bootstrap/scss/bootstrap";
+@import './config/typography';
+@import './ui/buttons';
+
+
+footer,
+header {
+    padding: 40px;
+    text-align: center;
+}
