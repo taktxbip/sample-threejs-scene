@@ -4,38 +4,43 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 class DefaultScene {
   constructor() {
 
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#fff');
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.renderer = new THREE.WebGLRenderer();
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    const renderer = new THREE.WebGLRenderer();
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    const geometry = new THREE.PlaneGeometry(1, 1);
-    const material = new THREE.MeshBasicMaterial({
+    this.geometry = new THREE.PlaneGeometry(1, 1);
+    this.material = new THREE.MeshBasicMaterial({
       color: 0x000066,
       side: THREE.DoubleSide
     });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
 
-    camera.position.z = 2;
-    controls.update();
+    this.plane = new THREE.Mesh(this.geometry, this.material);
+    this.scene.add(this.plane);
 
-    function animate() {
-      requestAnimationFrame(animate);
+    this.settings();
+    this.init();
 
-      controls.update();
+  }
 
-      renderer.render(scene, camera);
-    };
+  settings() {
+    this.scene.background = new THREE.Color('#fff');
+    this.camera.position.z = 1.3;
+  }
 
-    animate();
+  init() {
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(this.renderer.domElement);
+
+    this.controls.update();
+    this.render();
+  }
+
+  render() {
+    this.controls.update();
+
+    this.renderer.render(this.scene, this.camera);
+    window.requestAnimationFrame(this.render.bind(this));
   }
 
 }

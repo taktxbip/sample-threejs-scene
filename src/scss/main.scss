@@ -1,15 +1,8 @@
-@import './libs/_functions';
-@import './config/variables';
-@import './config/bootstrap-variables';
-@import './libs/_mixins';
-@import './config/global';
-@import "~bootstrap/scss/bootstrap";
-@import './config/typography';
-@import './ui/buttons';
+canvas {
+    display: block;
+    margin: 0;
+}
 
-
-footer,
-header {
-    padding: 40px;
-    text-align: center;
+body {
+    margin: 0;
 }
